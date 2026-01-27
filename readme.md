@@ -4,12 +4,6 @@ Welcome!
 
 As part of Full Stack Deep Learning 2022, we will incrementally develop a complete deep learning codebase to create and deploy a model that understands the content of hand-written paragraphs.
 
-For an overview of the Text Recognizer application architecture, click the badge below to open an interactive Jupyter notebook on Google Colab:
-
-<div align="center">
-  <a href="http://fsdl.me/2022-overview"> <img src=https://colab.research.google.com/assets/colab-badge.svg width=240> </a>
-</div> <br>
-
 We will use the modern stack of [PyTorch](https://pytorch.org/) and [PyTorch Lightning](https://www.pytorchlightning.ai/).
 
 We will use the main workhorses of DL today: CNNs and Transformers.

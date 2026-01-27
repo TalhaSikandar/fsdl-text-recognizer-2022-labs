@@ -7,6 +7,18 @@ conda-update:
 	conda env update --prune -f environment.yml
 	echo "!!!RUN THE conda activate COMMAND ABOVE RIGHT NOW!!!"
 
+# Update pip
+conda-pip-update:
+	conda run -n fsdl-text-recognizer-2022 pip install --upgrade pip==23.1.2 
+	echo "!!!RUN THE conda activate COMMAND ABOVE RIGHT NOW!!!"
+
+# setup kernel
+conda-setup-kernel:
+	# install ipykernel in the conda env
+	conda run -n fsdl-text-recognizer-2022 pip install ipykernel==6.22.0
+	# register the conda env as a jupyter kernel
+	conda run -n fsdl-text-recognizer-2022 python -m ipykernel install --user --name fsdl-text-recognizer-2022 --display-name "Python (fsdl-text-recognizer-2022)"
+	echo "!!!RUN THE conda activate COMMAND ABOVE RIGHT NOW!!!"
 # Compile and install exact pip packages
 pip-tools:
 	pip install pip-tools==6.13.0 setuptools==67.7.2

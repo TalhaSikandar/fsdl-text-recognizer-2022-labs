@@ -13,6 +13,7 @@ Google Colab is a great way to get access to fast GPUs for free.
 All you need is a Google account.
 
 The preferred way to interact with the labs on Colab is just to click on badges like this one:
+
 <div align="center">
   <a href="http://fsdl.me/lab01-colab"> <img src=https://colab.research.google.com/assets/colab-badge.svg width=240> </a>
 </div> <br>
@@ -36,26 +37,23 @@ Now, paste the following into a cell and run it:
 # FSDL 2022 Setup
 lab_idx = None
 
-if "bootstrap" not in locals() or bootstrap.run:
-    # path management for Python
-    pythonpath, = !echo $PYTHONPATH
-    if "." not in pythonpath.split(":"):
-        pythonpath = ".:" + pythonpath
-        %env PYTHONPATH={pythonpath}
-        !echo $PYTHONPATH
+# path management for Python
+pythonpath, = !echo $PYTHONPATH
+if "." not in pythonpath.split(":"):
+    pythonpath = ".:" + pythonpath
+    %env PYTHONPATH={pythonpath}
+    !echo $PYTHONPATH
 
-    # get both Colab and local notebooks into the same state
-    !wget --quiet https://fsdl.me/gist-bootstrap -O bootstrap.py
-    import bootstrap
+# get both Colab and local notebooks into the same state
+import bootstrap
 
-    # change into the lab directory
-    bootstrap.change_to_lab_dir(lab_idx=lab_idx)
+# change into the lab directory
+bootstrap.change_to_lab_dir(lab_idx=lab_idx)
 
-    # allow "hot-reloading" of modules
-    %load_ext autoreload
-    %autoreload 2
+# allow "hot-reloading" of modules
+%load_ext autoreload
+%autoreload 2
 
-    bootstrap.run = False  # change to True re-run setup
 
 !pwd
 %ls
@@ -93,6 +91,8 @@ If you get stuck, it's better to at least [get started with the labs on Colab](h
 - `environment.yml` specifies Python and optionally CUDA/CUDNN
 - `make conda-update` creates/updates a virtual environment
 - `conda activate fsdl-text-recognizer-2022` activates the virtual environment
+- `make pip-update` installs appropriate version of pip
+- `make conda-setup-kernel` setup kernel for jupyter notebook.
 - `requirements/prod.in` and `requirements/dev.in` specify core Python packages in that environment
 - `make pip-tools` resolves all other Python dependencies and installs them
 - `export PYTHONPATH=.:$PYTHONPATH` makes the current directory visible on your Python path -- add it to your `~/.bashrc` and `source ~/.bashrc`
@@ -127,7 +127,6 @@ so it doesn't matter which installer you choose.
 In the project we use the version of Python used in Google Colab,
 which at time of writing is Python 3.10.
 
-
 Note that you will likely need to close and re-open your terminal.
 Afterwards, you should have ability to run the `conda` command in your terminal.
 
@@ -157,11 +156,13 @@ Using `pip-tools` lets us do three nice things:
 #### Set PYTHONPATH
 
 Last, run `export PYTHONPATH=.` before executing any commands later on, or you will get errors like this:
+
 ```python
 ModuleNotFoundError: No module named 'text_recognizer'
 ```
 
 In order to not have to set `PYTHONPATH` in every terminal you open, just add that line as the last line of the `~/.bashrc` file using a text editor of your choice (e.g. `nano ~/.bashrc`) or by concatenating with `>>`
+
 ```bash
 echo "export PYTHONPATH=.:$PYTHONPATH" >> ~/.bashrc
 ```
